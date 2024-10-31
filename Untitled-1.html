@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>徐帜：公司财务第一次作业</title>
+    <link rel="stylesheet" href="wanda_movie_styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    
+    <style>
+        /* 图表容器样式 */
+        #lineChartContainer {
+            width: 90%;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        canvas {
+            width: 100%!important;
+            height: auto!important;
+        }
+    </style>
+      <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+        }
+        h2 {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .chart-container {
+            width: 90%;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        canvas {
+            max-width: 100%;
+        }
+        .note {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+      <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            padding: 20px;
+            text-align: center;
+        }
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .chart-container, table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            margin-top: 40px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #860808;
+            color: #fff;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .analysis {
+            width: 80%;
+            margin: 20px auto;
+            text-align: left;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>徐帜 公司财务第一次作业</h2>
+        <h1>第一部分：2012年-2022年全国文化及相关产业增加值占GDP比例</h1>
+</header>
+
+<div class="chart-container" id="lineChartContainer">
+    <canvas id="combinedChart"></canvas>
+</div>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>年份</th>
+            <th>增加值<br>(亿元)</th>
+            <th>占GDP比重<br>(%)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>2012</td><td>18071</td><td>3.36%</td></tr>
+        <tr><td>2013</td><td>21870</td><td>3.69%</td></tr>
+        <tr><td>2014</td><td>24538</td><td>3.81%</td></tr>
+        <tr><td>2015</td><td>27235</td><td>3.95%</td></tr>
+        <tr><td>2016</td><td>30785</td><td>4.12%</td></tr>
+        <tr><td>2017</td><td>35427</td><td>4.26%</td></tr>
+        <tr><td>2018</td><td>41171</td><td>4.48%</td></tr>
+        <tr><td>2019</td><td>44363</td><td>4.5%</td></tr>
+        <tr><td>2020</td><td>44945</td><td>4.43%</td></tr>
+        <tr><td>2021</td><td>52385</td><td>4.56%</td></tr>
+        <tr><td>2022</td><td>53782</td><td>4.46%</td></tr>
+    </tbody>
+</table>
+
+<div class="analysis">
+    <p>2012年到2022年，全国文化及相关产业增加值占GDP比重总体呈上升趋势，表明文化产业在中国经济中的重要性逐步提高。<br>2021年达到最高值4.56%，显示出文化产业的持续增长潜力。</p>
+</div>
+
+<script>
+    // 获取图表的2D上下文
+    const ctx = document.getElementById('combinedChart').getContext('2d');
+
+    const data = {
+        labels: ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'],
+        datasets: [
+            {
+                label: '增加值 (亿元)',
+                data: [18071, 21870, 24538, 27235, 30785, 35427, 41171, 44363, 44945, 52385, 53782],
+                type: 'bar',
+                backgroundColor: 'rgba(134, 8, 7, 0.4)',
+                borderColor: 'rgba(134, 8, 7, 1)',
+                borderWidth: 0.1
+            },
+            {
+                label: '占GDP比重 (%)',
+                data: [3.36, 3.69, 3.81, 3.95, 4.12, 4.26, 4.48, 4.5, 4.43, 4.56, 4.46],
+                type: 'line',
+                fill: false,
+                borderColor: 'rgba(0, 0, 0, 1)',
+                backgroundColor: 'rgba(134, 8, 7, 0.1)',
+                tension: 0.4,
+                yAxisID: 'right-y-axis'
+            }
+        ]
+    };
+
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            if (context.dataset.type === 'bar') {
+                                return context.dataset.label + ': ' + context.raw + '亿元';
+                            } else {
+                                return context.dataset.label + ': ' + context.raw + '%';
+                            }
+                        }
+                    }
+                },
+                legend: {
+                    display: true,
+                    position: 'top'
+                },
+                datalabels: {
+                    anchor: 'end',
+                    align: 'top',
+                    formatter: function (value) {
+                        return value + '亿元';
+                    }
+                }
+            },
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: '年份',
+                        font: {
+                            fontWeight: 'bold',
+                            fontSize: 16
+                        }
+                    },
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                    id: 'left-y-axis',
+                    title: {
+                        display: true,
+                        text: '增加值 (亿元)',
+                        font: {
+                            fontWeight: 'bold',
+                            fontSize: 16
+                        }
+                    },
+                    position: 'left',
+                    beginAtZero: true
+                },
+                y2: {
+                    id: 'right-y-axis',
+                    position: 'right',
+                    title: {
+                        display: true,
+                        text: '占GDP比重 (%)',
+                        font: {
+                            fontWeight: 'bold',
+                            fontSize: 16
+                        }
+                    },
+                    beginAtZero: true,
+                    grid: {
+                        drawOnChartArea: false
+                    }
+                }
+            }
+        }
+    };
+
+    const combinedChart = new Chart(ctx, config);
+</script>
+
+    <header>
+              <h1>第二部分：十大行业平均总资产回报率、毛利率、总资产周转率对比</h1>
+    </header>
+
+<div class="chart-container">
+    <canvas id="grossMarginChart"></canvas>
+</div>
+<div class="chart-container">
+    <canvas id="roaChart"></canvas>
+</div>
+<div class="chart-container">
+    <canvas id="assetTurnoverChart"></canvas>
+</div>
+
+<p class="note">行业划分标准为申万二级，数据来源于上海申银万国证券研究所。</p>
+
+<script>
+    const industries = ['影视院线', '游戏', '广告营销', '服装家纺', '乘用汽车', '光学电子', '白酒', '化学制药', '普钢', '化妆品'];
+    const grossMarginData = [22.84, 60.2, 16.93, 41.61, 11.11, 18.05, 69.79, 53.06, 4.54, 43.35];
+    const roaData = [2.92, 4.42, -1.62, 4.49, 1.15, 1.63, 17.86, 4.38, 0.81, 8.37];
+    const assetTurnoverData = [0.3, 0.51, 1.13, 0.61, 0.72, 0.53, 0.56, 0.44, 1.18, 0.62];
+
+    const highlightIndustries = ['游戏', '影视院线', '广告营销'];
+    const highlightColor = 'rgba(134, 8, 8, 0.4)';
+    const normalColor = 'rgba(192, 192, 192, 0.8)';
+
+    const sortAndHighlightData = (industries, data) => {
+        const combined = industries.map((industry, i) => ({
+            industry,
+            value: data[i],
+            color: highlightIndustries.includes(industry) ? highlightColor : normalColor
+        }));
+        combined.sort((a, b) => {
+            if (highlightIndustries.includes(a.industry) && !highlightIndustries.includes(b.industry)) return 1;
+            if (!highlightIndustries.includes(a.industry) && highlightIndustries.includes(b.industry)) return -1;
+            return b.value - a.value;
+        });
+        return {
+            sortedIndustries: combined.map(item => item.industry),
+            sortedData: combined.map(item => item.value),
+            colors: combined.map(item => item.color)
+        };
+    };
+
+    const { sortedIndustries: sortedGrossMarginIndustries, sortedData: sortedGrossMarginData, colors: grossMarginColors } = sortAndHighlightData(industries, grossMarginData);
+    const { sortedIndustries: sortedRoaIndustries, sortedData: sortedRoaData, colors: roaColors } = sortAndHighlightData(industries, roaData);
+    const { sortedIndustries: sortedAssetTurnoverIndustries, sortedData: sortedAssetTurnoverData, colors: assetTurnoverColors } = sortAndHighlightData(industries, assetTurnoverData);
+
+    const createChart = (ctx, title, data, industries, colors, maxTicks) => {
+        return new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: industries,
+                datasets: [{
+                    label: title,
+                    data: data,
+                    backgroundColor: colors,
+                    borderColor: colors.map(color => color.replace('0.8', '1')),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '行业',
+                            font: {
+                                weight: 'bold',
+                                size: 16
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        max: maxTicks,
+                        title: {
+                            display: true,
+                            text: title,
+                            font: {
+                                weight: 'bold',
+                                size: 16
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.raw.toFixed(2);
+                            }
+                        }
+                    },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        formatter: function(value) {
+                            return value.toFixed(2);
+                        },
+                        font: {
+                            weight: 'bold'
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+    };
+
+    const grossMarginCtx = document.getElementById('grossMarginChart').getContext('2d');
+    createChart(grossMarginCtx, '毛利率 (%)', sortedGrossMarginData, sortedGrossMarginIndustries, grossMarginColors, Math.max(...grossMarginData) * 1.2);
+
+    const roaCtx = document.getElementById('roaChart').getContext('2d');
+    createChart(roaCtx, '总资产回报率 (ROA) (%)', sortedRoaData, sortedRoaIndustries, roaColors, 20);
+
+    const assetTurnoverCtx = document.getElementById('assetTurnoverChart').getContext('2d');
+    createChart(assetTurnoverCtx, '总资产周转率（次）', sortedAssetTurnoverData, sortedAssetTurnoverIndustries, assetTurnoverColors, Math.max(...assetTurnoverData) * 1.2);
+</script>
+
+    <header>
+        <img src="http://www.wandafilm.com/images/wd_pic1.png" alt="万达电影LOGO" class="logo">
+        <h1>第三部分：万达电影-影视院线行业对比</h1>
+    </header>
+    <main>
+        <section class="description">
+            <p>万达电影在文化产业中的影视院线行业占据极其重要地位，国内拥有已开业直营影院708家，6,145块银幕，市场份额14.2%。以下是其财务信息。</p>
+        </section>
+        <section class="table-section">
+            <table>
+                <thead>
+                    <tr>
+                        <th>信息</th>
+                        <th>万达电影</th>
+                        <th>影视院线行业评均</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2023年末总资产（亿）</td>
+                        <td>251.3</td>
+                        <td>67.339</td>
+                    </tr>
+                    <tr>
+                        <td>2022年末总资产（亿）</td>
+                        <td>267.1</td>
+                        <td>68.90</td>
+                    </tr>
+                    <tr>
+                        <td>平均总资产（亿）</td>
+                        <td>259.2</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>营业收入（亿）</td>
+                        <td>146.2</td>
+                        <td>21.42</td>
+                    </tr>
+                    <tr>
+                        <td>营业成本（亿）</td>
+                        <td>105.7</td>
+                        <td>20.26</td>
+                    </tr>
+                    <tr>
+                        <td>净利润（亿）</td>
+                        <td>9.12</td>
+                        <td>0.59</td>
+                    </tr>
+                    <tr>
+                        <td>总资产回报率（%）</td>
+                        <td>3.5</td>
+                        <td>2.92</td>
+                    </tr>
+                    <tr>
+                        <td>毛利率（%）</td>
+                        <td>27.7</td>
+                        <td>22.84</td>
+                    </tr>
+                    <tr>
+                        <td>总资产周转率（次）</td>
+                        <td>0.56</td>
+                        <td>0.3</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="analysis-section">
+            <h2>财务指标分析</h2>
+            <p>
+                <strong>总资产回报率（ROA）</strong>：万达电影的 ROA 为 3.5%，高于行业平均的 2.92%。这表明万达电影在资产利用效率上优于行业平均水平，能够更有效地利用资产来创造利润。公司在运营过程中，可能在影院运营管理、影片资源获取与排片、成本控制等方面有更出色的表现，使得资产能够产生更高的回报。
+            </p>
+            <p>
+                <strong>总资产周转率</strong>：万达电影的总资产周转率为 0.564 次，远高于行业平均值 0.3 次。这意味着万达电影在资产运营速度方面表现出色，资产在企业内部的流转速度更快，能够更快地将资产投入到业务运营中转化为收入。可能是因为万达电影拥有更高效的运营模式、更广泛的市场渠道以及更优质的资源配置，使其资产利用更加充分。
+            </p>
+            <p>
+                <strong>毛利率</strong>：万达电影的毛利率为 27.7%，高于行业平均的 22.84%。这说明万达电影在成本控制和产品定价方面具有优势，能够在保证产品质量和服务水平的前提下，获取更高比例的利润。其在产业链中的议价能力、运营效率和成本管理能力有助于维持较高的毛利率。
+            </p>
+        </section>
+    </main>
+    <footer>
+        <p>
+            数据来源 &copy; 国家统计局 《中国文化及相关产业统计年鉴》新浪财经 东方财富网 上海申银万国证券研究所 <br>
+            作者：徐帜 12470910070
+        
+        </p>
+    </footer>
+</body>
+</html>
